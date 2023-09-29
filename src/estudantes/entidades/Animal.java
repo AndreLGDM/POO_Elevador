@@ -50,7 +50,7 @@ public class Animal {
      */
 
     public Animal(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal) {
+            int temperaturaIdeal, int hash, String toString, boolean equals) {
         this.id = id;
         this.nome = nome;
         this.especie = especie;
