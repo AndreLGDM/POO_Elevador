@@ -36,7 +36,7 @@ public class Animal {
     private int tempoDeEspera;
     private int temperaturaIdeal; // em graus Celsius
 
-   /**
+    /**
      * Construtor do animal.
      * Todos os atributos são passados por parâmetro, exceto o tempo de espera
      * que sempre começa em 0.
@@ -59,7 +59,7 @@ public class Animal {
         this.tempoDeEspera = tempoDeEspera;
         this.temperaturaIdeal = temperaturaIdeal;
     }
-   
+
     public int getPaciencia() {
         return paciencia;
     }
@@ -83,8 +83,6 @@ public class Animal {
     public int getTemperaturaIdeal() {
         return temperaturaIdeal;
     }
-
-    
 
     /**
      * Retorna o número de identificaçao do animal.
@@ -128,5 +126,49 @@ public class Animal {
         if (paciencia < tempoDeEspera) {
             throw new RuntimeException("Tempo de Espera excedeu a paciência!");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
+                + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
+                + temperaturaIdeal;
+    }
+
+    @Override
+    public boolean equals(Object animal) {
+        if (animal == null) {
+            return false;
+        }
+        if (this == animal) {
+            return true;
+        }
+        if (animal instanceof Animal) {
+            return false;
+        }
+        Animal outrAnimal = (Animal) animal;
+        if (this.id == outrAnimal.id && this.nome == outrAnimal.nome && this.especie == outrAnimal.especie
+                && this.paciencia == outrAnimal.paciencia && this.peso == outrAnimal.peso
+                && this.andarDesejado == outrAnimal.andarDesejado && this.tempoDeEspera == outrAnimal.tempoDeEspera
+                && this.temperaturaIdeal == outrAnimal.temperaturaIdeal) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 13;
+        hash = hash * nome.hashCode();
+        hash = hash * especie.hashCode();
+        hash = hash * id * 17;
+        hash = hash * paciencia * 19;
+        hash = hash * peso * 23;
+        hash = hash * andarDesejado * 29;
+        hash = hash * temperaturaIdeal * 31;
+        hash = hash * tempoDeEspera * 37;
+        return hash;
+
     }
 }
