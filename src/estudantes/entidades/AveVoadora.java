@@ -2,13 +2,12 @@ package estudantes.entidades;
 
 public class AveVoadora extends Ave {
 
-    int PACIENCIA_MAXIMA = 20;
-    String voar;
+    private int PACIENCIA_MAXIMA = 20;
+    private String voar;
 
     public AveVoadora(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String corDasPenas, String andar, int hash, String toString, boolean equals) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, corDasPenas, andar,
-                andarDesejado, especie, false);
+            int temperaturaIdeal, String corDasPenas, String andar, String voar) {
+        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, corDasPenas, andar);
         this.voar = voar;
     }
 
@@ -38,7 +37,8 @@ public class AveVoadora extends Ave {
         if (this.id == outrAve.id && this.nome == outrAve.nome && this.especie == outrAve.especie
                 && this.paciencia == outrAve.paciencia && this.peso == outrAve.peso
                 && this.andarDesejado == outrAve.andarDesejado && this.tempoDeEspera == outrAve.tempoDeEspera
-                && this.temperaturaIdeal == outrAve.temperaturaIdeal && this.corDasPenas.equals(outrAve.corDasPenas)
+                && this.temperaturaIdeal == outrAve.temperaturaIdeal && this.andar.equals(outrAve.andar)
+                && this.corDasPenas.equals(outrAve.corDasPenas)
                 && this.voar.equals(outrAve.voar)) {
             return true;
         } else {

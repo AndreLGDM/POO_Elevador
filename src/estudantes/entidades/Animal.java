@@ -50,7 +50,8 @@ public class Animal {
      */
 
     public Animal(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, int hash, String toString, boolean equals) {
+            int temperaturaIdeal) {
+        this.paciencia = 0;
         this.id = id;
         this.nome = nome;
         this.especie = especie;
@@ -125,6 +126,11 @@ public class Animal {
         tempoDeEspera++;
         if (paciencia < tempoDeEspera) {
             throw new RuntimeException("Tempo de Espera excedeu a paciência!");
+        } else {
+            for (int i = paciencia; i < PACIENCIA_MAXIMA; i++) {
+                paciencia++;
+                break;
+            }
         }
     }
 

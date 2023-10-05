@@ -1,43 +1,43 @@
 package estudantes.entidades;
 
-public class MamiferoAquatico extends Mamifero {
+public class MamiferoTerrestre extends Mamifero {
+    private final int PACIENCIA_MAXIMA = 35;
+    private String andar;
 
-    private int PACIENCIA_MAXIMA = 40;
-    private String nadar;
-
-    public MamiferoAquatico(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, boolean peludo, String nadar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, nome, especie, peludo);
+    public MamiferoTerrestre(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
+            int temperaturaIdeal, boolean peludo, String andar) {
+        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, especie, andar, peludo);
+        this.andar = andar;
     }
 
-    public String getNadar() {
-        return nadar;
+    public String getAndar() {
+        return andar;
     }
 
     @Override
     public String toString() {
         return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
                 + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
-                + temperaturaIdeal + "nadar: " + nadar;
+                + temperaturaIdeal + "andar: " + andar;
     }
 
     @Override
-    public boolean equals(Object mamiferoaquatico) {
-        if (mamiferoaquatico == null) {
+    public boolean equals(Object mamiferoterrestre) {
+        if (mamiferoterrestre == null) {
             return false;
         }
-        if (this == mamiferoaquatico) {
+        if (this == mamiferoterrestre) {
             return true;
         }
-        if (mamiferoaquatico instanceof MamiferoAquatico) {
+        if (mamiferoterrestre instanceof MamiferoTerrestre) {
             return false;
         }
-        MamiferoAquatico outromamifero = (MamiferoAquatico) mamiferoaquatico;
+        MamiferoTerrestre outromamifero = (MamiferoTerrestre) mamiferoterrestre;
         if (this.id == outromamifero.id && this.nome == outromamifero.nome && this.especie == outromamifero.especie
                 && this.paciencia == outromamifero.paciencia && this.peso == outromamifero.peso
                 && this.andarDesejado == outromamifero.andarDesejado
                 && this.tempoDeEspera == outromamifero.tempoDeEspera
-                && this.temperaturaIdeal == outromamifero.temperaturaIdeal && this.nadar.equals(outromamifero.nadar)) {
+                && this.temperaturaIdeal == outromamifero.temperaturaIdeal && this.andar.equals(outromamifero.andar)) {
             return true;
         } else {
             return false;
@@ -47,7 +47,7 @@ public class MamiferoAquatico extends Mamifero {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * nadar.hashCode();
+        hash = hash * andar.hashCode();
         hash = hash * nome.hashCode();
         hash = hash * especie.hashCode();
         hash = hash * id * 17;
@@ -58,4 +58,5 @@ public class MamiferoAquatico extends Mamifero {
         hash = hash * tempoDeEspera * 37;
         return hash;
     }
+
 }

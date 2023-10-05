@@ -2,12 +2,11 @@ package estudantes.entidades;
 
 abstract class Mamifero extends Animal {
 
-    boolean peludo;
+    protected boolean peludo;
 
     public Mamifero(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String corDasPenas, String andar, int hash, String toString, boolean equals,
-            boolean peludo) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, hash, toString, equals);
+            int temperaturaIdeal, String corDasPenas, String andar, boolean peludo) {
+        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
         this.peludo = peludo;
     }
 

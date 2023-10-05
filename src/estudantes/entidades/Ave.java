@@ -2,13 +2,13 @@ package estudantes.entidades;
 
 public class Ave extends Animal {
 
-    int PACIENCIA_MAXIMA = 30;
-    String corDasPenas;
-    String andar;
+    private final int PACIENCIA_MAXIMA = 30;
+    protected String corDasPenas;
+    protected String andar;
 
     public Ave(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String corDasPenas, String andar, int hash, String toString, boolean equals) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, hash, toString, equals);
+            int temperaturaIdeal, String corDasPenas, String andar) {
+        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
         this.corDasPenas = corDasPenas;
         this.andar = andar;
     }

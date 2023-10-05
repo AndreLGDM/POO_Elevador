@@ -1,53 +1,43 @@
 package estudantes.entidades;
 
-public class Anfibio extends Animal {
+public class Reptil extends Animal {
 
-    private final int PACIENCIA_MAXIMA = 45;
+    private final int PACIENCIA_MAXIMA = 10;
     private String andar;
-    private String nadar;
 
-    public Anfibio(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String nadar, String andar) {
+    public Reptil(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
+            int temperaturaIdeal, String andar) {
         super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
         this.andar = andar;
-        this.nadar = nadar;
-    }
-
-    public int getPACIENCIA_MAXIMA() {
-        return PACIENCIA_MAXIMA;
     }
 
     public String getAndar() {
         return andar;
     }
 
-    public String getNadar() {
-        return nadar;
-    }
-
     @Override
     public String toString() {
         return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
                 + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
-                + temperaturaIdeal;
+                + temperaturaIdeal + " andar: " + andar;
     }
 
     @Override
-    public boolean equals(Object anfibio) {
-        if (anfibio == null) {
+    public boolean equals(Object reptil) {
+        if (reptil == null) {
             return false;
         }
-        if (this == anfibio) {
+        if (this == reptil) {
             return true;
         }
-        if (anfibio instanceof Ave) {
+        if (reptil instanceof Reptil) {
             return false;
         }
-        Anfibio outrAnfibio = (Anfibio) anfibio;
-        if (this.id == outrAnfibio.id && this.nome == outrAnfibio.nome && this.especie == outrAnfibio.especie
-                && this.paciencia == outrAnfibio.paciencia && this.peso == outrAnfibio.peso
-                && this.andarDesejado == outrAnfibio.andarDesejado && this.tempoDeEspera == outrAnfibio.tempoDeEspera
-                && this.temperaturaIdeal == outrAnfibio.temperaturaIdeal && this.nadar.equals(outrAnfibio.nadar)) {
+        Reptil outroReptil = (Reptil) reptil;
+        if (this.id == outroReptil.id && this.nome == outroReptil.nome && this.especie == outroReptil.especie
+                && this.paciencia == outroReptil.paciencia && this.peso == outroReptil.peso
+                && this.andarDesejado == outroReptil.andarDesejado && this.tempoDeEspera == outroReptil.tempoDeEspera
+                && this.temperaturaIdeal == outroReptil.temperaturaIdeal && this.andar.equals(outroReptil.andar)) {
             return true;
         } else {
             return false;
@@ -57,7 +47,6 @@ public class Anfibio extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * nadar.hashCode();
         hash = hash * andar.hashCode();
         hash = hash * nome.hashCode();
         hash = hash * especie.hashCode();
@@ -68,7 +57,6 @@ public class Anfibio extends Animal {
         hash = hash * temperaturaIdeal * 31;
         hash = hash * tempoDeEspera * 37;
         return hash;
-
     }
 
 }
