@@ -11,4 +11,7 @@ public class Aves extends Animal {
         this.corDasPenas = corDasPenas;
     }
 
+    public String getCorDasPenas() {
+        return corDasPenas;
+    }
 }
