@@ -25,11 +25,13 @@ abstract class Mamifero extends Animal {
             return false;
         }
         Mamifero outroMamifero = (Mamifero) mamifero;
-        if (this.id == outroMamifero.id && this.nome == outroMamifero.nome && this.especie == outroMamifero.especie
-                && this.paciencia == outroMamifero.paciencia && this.peso == outroMamifero.peso
-                && this.andarDesejado == outroMamifero.andarDesejado
-                && this.tempoDeEspera == outroMamifero.tempoDeEspera
-                && this.temperaturaIdeal == outroMamifero.temperaturaIdeal) {
+        if (this.getId() == outroMamifero.getId()
+                && this.getNome() == outroMamifero.getNome()
+                && this.getEspecie() == outroMamifero.getEspecie()
+                && this.getPeso() == outroMamifero.getPeso()
+                && this.getAndarDesejado() == outroMamifero.getAndarDesejado()
+                && this.getTempoDeEspera() == outroMamifero.getTempoDeEspera()
+                && this.getTemperaturaIdeal() == outroMamifero.getTemperaturaIdeal()) {
             return true;
         } else {
             return false;
@@ -39,14 +41,13 @@ abstract class Mamifero extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * nome.hashCode();
-        hash = hash * especie.hashCode();
-        hash = hash * id * 17;
-        hash = hash * paciencia * 19;
-        hash = hash * peso * 23;
-        hash = hash * andarDesejado * 29;
-        hash = hash * temperaturaIdeal * 31;
-        hash = hash * tempoDeEspera * 37;
+        hash = hash * getNome().hashCode();
+        hash = hash * getEspecie().hashCode();
+        hash = hash * getId() * 17;
+        hash = hash * getPeso() * 23;
+        hash = hash * getAndarDesejado() * 29;
+        hash = hash * getTemperaturaIdeal() * 31;
+        hash = hash * getTempoDeEspera() * 37;
         return hash;
     }
 }

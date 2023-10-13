@@ -17,9 +17,11 @@ public class AveVoadora extends Ave {
 
     @Override
     public String toString() {
-        return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
-                + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
-                + temperaturaIdeal + " voar: " + voar;
+        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+                + getEspecie() + " peso: " + getPeso()
+                + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
+                + " temperatura ideal: "
+                + getTemperaturaIdeal();
     }
 
     @Override
@@ -34,10 +36,14 @@ public class AveVoadora extends Ave {
             return false;
         }
         AveVoadora outrAve = (AveVoadora) ave;
-        if (this.id == outrAve.id && this.nome == outrAve.nome && this.especie == outrAve.especie
-                && this.paciencia == outrAve.paciencia && this.peso == outrAve.peso
-                && this.andarDesejado == outrAve.andarDesejado && this.tempoDeEspera == outrAve.tempoDeEspera
-                && this.temperaturaIdeal == outrAve.temperaturaIdeal && this.andar.equals(outrAve.andar)
+        if (this.getId() == outrAve.getId()
+                && this.getNome() == outrAve.getNome()
+                && this.getEspecie() == outrAve.getEspecie()
+                && this.getPeso() == outrAve.getPeso()
+                && this.getAndarDesejado() == outrAve.getAndarDesejado()
+                && this.getTempoDeEspera() == outrAve.getTempoDeEspera()
+                && this.getTemperaturaIdeal() == outrAve.getTemperaturaIdeal()
+                && this.andar.equals(outrAve.andar)
                 && this.corDasPenas.equals(outrAve.corDasPenas)
                 && this.voar.equals(outrAve.voar)) {
             return true;
@@ -52,14 +58,13 @@ public class AveVoadora extends Ave {
         hash = hash * voar.hashCode();
         hash = hash * andar.hashCode();
         hash = hash * corDasPenas.hashCode();
-        hash = hash * nome.hashCode();
-        hash = hash * especie.hashCode();
-        hash = hash * id * 17;
-        hash = hash * paciencia * 19;
-        hash = hash * peso * 23;
-        hash = hash * andarDesejado * 29;
-        hash = hash * temperaturaIdeal * 31;
-        hash = hash * tempoDeEspera * 37;
+        hash = hash * getNome().hashCode();
+        hash = hash * getEspecie().hashCode();
+        hash = hash * getId() * 17;
+        hash = hash * getPeso() * 23;
+        hash = hash * getAndarDesejado() * 29;
+        hash = hash * getTemperaturaIdeal() * 31;
+        hash = hash * getTempoDeEspera() * 37;
         return hash;
     }
 }

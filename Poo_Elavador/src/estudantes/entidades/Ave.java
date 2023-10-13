@@ -23,9 +23,11 @@ public class Ave extends Animal {
 
     @Override
     public String toString() {
-        return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
-                + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
-                + temperaturaIdeal;
+        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+                + getEspecie() + " peso: " + getPeso()
+                + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
+                + " temperatura ideal: "
+                + getTemperaturaIdeal();
     }
 
     @Override
@@ -40,10 +42,13 @@ public class Ave extends Animal {
             return false;
         }
         Ave outrAve = (Ave) ave;
-        if (this.id == outrAve.id && this.nome == outrAve.nome && this.especie == outrAve.especie
-                && this.paciencia == outrAve.paciencia && this.peso == outrAve.peso
-                && this.andarDesejado == outrAve.andarDesejado && this.tempoDeEspera == outrAve.tempoDeEspera
-                && this.temperaturaIdeal == outrAve.temperaturaIdeal && this.corDasPenas.equals(outrAve.corDasPenas)) {
+        if (this.getId() == outrAve.getId() && this.getNome() == outrAve.getNome()
+                && this.getEspecie() == outrAve.getEspecie()
+                && this.getPeso() == outrAve.getPeso()
+                && this.getAndarDesejado() == outrAve.getAndarDesejado()
+                && this.getTempoDeEspera() == outrAve.getTempoDeEspera()
+                && this.getTemperaturaIdeal() == outrAve.getTemperaturaIdeal()
+                && this.corDasPenas.equals(outrAve.corDasPenas)) {
             return true;
         } else {
             return false;
@@ -55,14 +60,13 @@ public class Ave extends Animal {
         int hash = 13;
         hash = hash * andar.hashCode();
         hash = hash * corDasPenas.hashCode();
-        hash = hash * nome.hashCode();
-        hash = hash * especie.hashCode();
-        hash = hash * id * 17;
-        hash = hash * paciencia * 19;
-        hash = hash * peso * 23;
-        hash = hash * andarDesejado * 29;
-        hash = hash * temperaturaIdeal * 31;
-        hash = hash * tempoDeEspera * 37;
+        hash = hash * getNome().hashCode();
+        hash = hash * getEspecie().hashCode();
+        hash = hash * getId() * 17;
+        hash = hash * getPeso() * 23;
+        hash = hash * getAndarDesejado() * 29;
+        hash = hash * getTemperaturaIdeal() * 31;
+        hash = hash * getTempoDeEspera() * 37;
         return hash;
     }
 }

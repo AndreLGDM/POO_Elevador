@@ -16,9 +16,11 @@ public class Reptil extends Animal {
 
     @Override
     public String toString() {
-        return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
-                + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
-                + temperaturaIdeal + " andar: " + andar;
+        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+                + getEspecie() + " peso: " + getPeso()
+                + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
+                + " temperatura ideal: "
+                + getTemperaturaIdeal();
     }
 
     @Override
@@ -33,10 +35,14 @@ public class Reptil extends Animal {
             return false;
         }
         Reptil outroReptil = (Reptil) reptil;
-        if (this.id == outroReptil.id && this.nome == outroReptil.nome && this.especie == outroReptil.especie
-                && this.paciencia == outroReptil.paciencia && this.peso == outroReptil.peso
-                && this.andarDesejado == outroReptil.andarDesejado && this.tempoDeEspera == outroReptil.tempoDeEspera
-                && this.temperaturaIdeal == outroReptil.temperaturaIdeal && this.andar.equals(outroReptil.andar)) {
+        if (this.getId() == outroReptil.getId()
+                && this.getNome() == outroReptil.getNome()
+                && this.getEspecie() == outroReptil.getEspecie()
+                && this.getPeso() == outroReptil.getPeso()
+                && this.getAndarDesejado() == outroReptil.getAndarDesejado()
+                && this.getTempoDeEspera() == outroReptil.getTempoDeEspera()
+                && this.getTemperaturaIdeal() == outroReptil.getTemperaturaIdeal()
+                && this.andar.equals(outroReptil.andar)) {
             return true;
         } else {
             return false;
@@ -47,14 +53,13 @@ public class Reptil extends Animal {
     public int hashCode() {
         int hash = 13;
         hash = hash * andar.hashCode();
-        hash = hash * nome.hashCode();
-        hash = hash * especie.hashCode();
-        hash = hash * id * 17;
-        hash = hash * paciencia * 19;
-        hash = hash * peso * 23;
-        hash = hash * andarDesejado * 29;
-        hash = hash * temperaturaIdeal * 31;
-        hash = hash * tempoDeEspera * 37;
+        hash = hash * getNome().hashCode();
+        hash = hash * getEspecie().hashCode();
+        hash = hash * getId() * 17;
+        hash = hash * getPeso() * 23;
+        hash = hash * getAndarDesejado() * 29;
+        hash = hash * getTemperaturaIdeal() * 31;
+        hash = hash * getTempoDeEspera() * 37;
         return hash;
     }
 
