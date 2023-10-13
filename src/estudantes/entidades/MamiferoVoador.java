@@ -4,9 +4,9 @@ public class MamiferoVoador extends Mamifero {
     private final int PACIENCIA_MAXIMA = 15;
     private String voar;
 
-    public MamiferoVoador(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, boolean peludo, String voar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, especie, voar, peludo);
+    public MamiferoVoador(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
+            boolean peludo) {
+        super(id, nome, especie, andarDesejado, peso, temperatura, peludo);
         this.voar = voar;
     }
 

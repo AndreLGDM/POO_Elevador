@@ -4,9 +4,9 @@ public class MamiferoTerrestre extends Mamifero {
     private final int PACIENCIA_MAXIMA = 35;
     private String andar;
 
-    public MamiferoTerrestre(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, boolean peludo, String andar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, especie, andar, peludo);
+    public MamiferoTerrestre(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
+            boolean peludo) {
+        super(id, nome, especie, andarDesejado, peso, temperatura, peludo);
         this.andar = andar;
     }
 

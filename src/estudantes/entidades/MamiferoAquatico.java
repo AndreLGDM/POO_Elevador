@@ -5,9 +5,9 @@ public class MamiferoAquatico extends Mamifero {
     private int PACIENCIA_MAXIMA = 40;
     private String nadar;
 
-    public MamiferoAquatico(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, boolean peludo, String nadar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, nome, especie, peludo);
+    public MamiferoAquatico(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
+            boolean peludo) {
+        super(id, nome, especie, andarDesejado, peso, temperatura, peludo);
     }
 
     public String getNadar() {

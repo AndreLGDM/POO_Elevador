@@ -5,9 +5,8 @@ public class Reptil extends Animal {
     private final int PACIENCIA_MAXIMA = 10;
     private String andar;
 
-    public Reptil(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String andar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
+    public Reptil(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
+        super(id, nome, especie, andarDesejado, peso, temperatura);
         this.andar = andar;
     }
 

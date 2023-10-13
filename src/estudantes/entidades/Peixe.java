@@ -4,9 +4,9 @@ public class Peixe extends Animal {
     private int PACIENCIA_MAXIMA = 60;
     private String corDasEscamas;
 
-    public Peixe(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, boolean peludo, String nadar, String corDasEscamas) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
+    public Peixe(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
+            String cordaescama) {
+        super(id, nome, especie, andarDesejado, peso, temperatura);
         this.corDasEscamas = corDasEscamas;
     }
 

@@ -49,16 +49,15 @@ public class Animal {
      * @param temperaturaIdeal
      */
 
-    public Animal(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal) {
+    public Animal(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
         this.paciencia = 0;
         this.id = id;
         this.nome = nome;
         this.especie = especie;
         this.peso = peso;
         this.andarDesejado = andarDesejado;
-        this.tempoDeEspera = tempoDeEspera;
-        this.temperaturaIdeal = temperaturaIdeal;
+        // this.tempoDeEspera = tempoDeEspera;
+        // this.temperaturaIdeal = temperaturaIdeal;
     }
 
     public int getPaciencia() {
@@ -124,13 +123,8 @@ public class Animal {
      */
     public void aumentaEspera() {
         tempoDeEspera++;
-        if (paciencia < tempoDeEspera) {
+        if (PACIENCIA_MAXIMA < tempoDeEspera) {
             throw new RuntimeException("Tempo de Espera excedeu a paciência!");
-        } else {
-            for (int i = paciencia; i < PACIENCIA_MAXIMA; i++) {
-                paciencia++;
-                break;
-            }
         }
     }
 

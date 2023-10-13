@@ -6,9 +6,8 @@ public class Anfibio extends Animal {
     private String andar;
     private String nadar;
 
-    public Anfibio(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String nadar, String andar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
+    public Anfibio(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
+        super(id, nome, especie, andarDesejado, peso, temperatura);
         this.andar = andar;
         this.nadar = nadar;
     }

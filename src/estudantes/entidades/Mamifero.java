@@ -4,9 +4,8 @@ abstract class Mamifero extends Animal {
 
     protected boolean peludo;
 
-    public Mamifero(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String corDasPenas, String andar, boolean peludo) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
+    public Mamifero(int id, String nome, String especie, int andarDesejado, int peso, int temperatura, boolean peludo) {
+        super(id, nome, especie, andarDesejado, peso, temperatura);
         this.peludo = peludo;
     }
 

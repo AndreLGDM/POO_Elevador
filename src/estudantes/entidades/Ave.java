@@ -6,9 +6,8 @@ public class Ave extends Animal {
     protected String corDasPenas;
     protected String andar;
 
-    public Ave(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String corDasPenas, String andar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal);
+    public Ave(int id, String nome, String especie, int andarDesejado, int peso, int temperatura, String cordapena) {
+        super(id, nome, especie, andarDesejado, peso, temperatura);
         this.corDasPenas = corDasPenas;
         this.andar = andar;
     }

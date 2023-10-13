@@ -5,9 +5,9 @@ public class AveVoadora extends Ave {
     private int PACIENCIA_MAXIMA = 20;
     private String voar;
 
-    public AveVoadora(int id, String nome, String especie, int peso, int andarDesejado, int tempoDeEspera,
-            int temperaturaIdeal, String corDasPenas, String andar, String voar) {
-        super(id, nome, especie, peso, andarDesejado, tempoDeEspera, temperaturaIdeal, corDasPenas, andar);
+    public AveVoadora(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
+            String cordepena) {
+        super(id, nome, especie, andarDesejado, peso, temperatura, especie);
         this.voar = voar;
     }
 
