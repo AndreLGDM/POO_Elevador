@@ -26,9 +26,11 @@ public class Anfibio extends Animal {
 
     @Override
     public String toString() {
-        return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
-                + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
-                + temperaturaIdeal;
+        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+                + getEspecie() + " peso: " + getPeso()
+                + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
+                + " temperatura ideal: "
+                + getTemperaturaIdeal();
     }
 
     @Override
@@ -43,10 +45,13 @@ public class Anfibio extends Animal {
             return false;
         }
         Anfibio outrAnfibio = (Anfibio) anfibio;
-        if (this.id == outrAnfibio.id && this.nome == outrAnfibio.nome && this.especie == outrAnfibio.especie
-                && this.paciencia == outrAnfibio.paciencia && this.peso == outrAnfibio.peso
-                && this.andarDesejado == outrAnfibio.andarDesejado && this.tempoDeEspera == outrAnfibio.tempoDeEspera
-                && this.temperaturaIdeal == outrAnfibio.temperaturaIdeal && this.nadar.equals(outrAnfibio.nadar)) {
+        if (this.getId() == outrAnfibio.getId() && this.getNome() == outrAnfibio.getNome()
+                && this.getEspecie() == outrAnfibio.getEspecie()
+                && this.getPeso() == outrAnfibio.getPeso()
+                && this.getAndarDesejado() == outrAnfibio.getAndarDesejado()
+                && this.getTempoDeEspera() == outrAnfibio.getTempoDeEspera()
+                && this.getTemperaturaIdeal() == outrAnfibio.getTemperaturaIdeal()
+                && this.nadar.equals(outrAnfibio.nadar)) {
             return true;
         } else {
             return false;
@@ -58,14 +63,13 @@ public class Anfibio extends Animal {
         int hash = 13;
         hash = hash * nadar.hashCode();
         hash = hash * andar.hashCode();
-        hash = hash * nome.hashCode();
-        hash = hash * especie.hashCode();
-        hash = hash * id * 17;
-        hash = hash * paciencia * 19;
-        hash = hash * peso * 23;
-        hash = hash * andarDesejado * 29;
-        hash = hash * temperaturaIdeal * 31;
-        hash = hash * tempoDeEspera * 37;
+        hash = hash * getNome().hashCode();
+        hash = hash * getEspecie().hashCode();
+        hash = hash * getId() * 17;
+        hash = hash * getPeso() * 23;
+        hash = hash * getAndarDesejado() * 29;
+        hash = hash * getTemperaturaIdeal() * 31;
+        hash = hash * getTempoDeEspera() * 37;
         return hash;
 
     }

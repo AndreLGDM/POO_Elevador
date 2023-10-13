@@ -27,14 +27,13 @@ public class Animal {
      */
     public final int PACIENCIA_MAXIMA = 25;// em segundos (ciclos de espera)
 
-    protected int id;
-    protected int paciencia;
-    protected String nome;
-    protected String especie;
-    protected int peso; // em quilos
-    protected int andarDesejado; // 0 é o térreo
-    protected int tempoDeEspera;
-    protected int temperaturaIdeal; // em graus Celsius
+    private int id;
+    private String nome;
+    private String especie;
+    private int peso;// em quilos
+    private int andarDesejado; // 0 é o térreo
+    private int tempoDeEspera;
+    private int temperaturaIdeal; // em graus Celsius
 
     /**
      * Construtor do animal.
@@ -50,7 +49,6 @@ public class Animal {
      */
 
     public Animal(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
-        this.paciencia = 0;
         this.id = id;
         this.nome = nome;
         this.especie = especie;
@@ -58,10 +56,6 @@ public class Animal {
         this.andarDesejado = andarDesejado;
         // this.tempoDeEspera = tempoDeEspera;
         // this.temperaturaIdeal = temperaturaIdeal;
-    }
-
-    public int getPaciencia() {
-        return paciencia;
     }
 
     public String getNome() {
@@ -130,7 +124,8 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "ID: " + id + " Nome: " + nome + " especie: " + especie + " paciencia: " + paciencia + " peso: " + peso
+        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + id + " Nome: " + nome + " especie: " + especie
+                + " peso: " + peso
                 + " Andar desejado: " + andarDesejado + " tempo de espera: " + tempoDeEspera + " temperatura ideal: "
                 + temperaturaIdeal;
     }
@@ -148,7 +143,7 @@ public class Animal {
         }
         Animal outrAnimal = (Animal) animal;
         if (this.id == outrAnimal.id && this.nome == outrAnimal.nome && this.especie == outrAnimal.especie
-                && this.paciencia == outrAnimal.paciencia && this.peso == outrAnimal.peso
+                && this.peso == outrAnimal.peso
                 && this.andarDesejado == outrAnimal.andarDesejado && this.tempoDeEspera == outrAnimal.tempoDeEspera
                 && this.temperaturaIdeal == outrAnimal.temperaturaIdeal) {
             return true;
@@ -163,7 +158,6 @@ public class Animal {
         hash = hash * nome.hashCode();
         hash = hash * especie.hashCode();
         hash = hash * id * 17;
-        hash = hash * paciencia * 19;
         hash = hash * peso * 23;
         hash = hash * andarDesejado * 29;
         hash = hash * temperaturaIdeal * 31;
