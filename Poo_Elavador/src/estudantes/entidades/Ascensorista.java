@@ -43,7 +43,11 @@ public class Ascensorista {
      * @param andar    o andar no qual o elevador está parado
      */
     public void agir(Elevador elevador, Andar andar) {
-        andar.getAndar();
+        Animal[] animal = new Animal[100];
+        animal = andar.checarFilaParaElevador();
+        for (int i = 0; i < animal.length; i++) {
+            System.out.println(animal[i]);
+        }
     }
 
 }

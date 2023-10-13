@@ -10,6 +10,7 @@ public class Ave extends Animal {
         super(id, nome, especie, andarDesejado, peso, temperatura);
         this.corDasPenas = corDasPenas;
         this.andar = andar;
+
     }
 
     public String getCorDasPenas() {
