@@ -14,9 +14,14 @@ public class Peixe extends Animal {
         return corDasEscamas;
     }
 
+    public void nadar() {
+        System.out.println("nadando");
+    }
+
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Peixe: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -31,7 +36,7 @@ public class Peixe extends Animal {
         if (this == peixe) {
             return true;
         }
-        if (peixe instanceof Peixe) {
+        if (!(peixe instanceof Peixe)) {
             return false;
         }
         Peixe outropeixe = (Peixe) peixe;

@@ -7,16 +7,20 @@ public class Reptil extends Animal {
 
     public Reptil(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
-        this.andar = andar;
     }
 
     public String getAndar() {
         return andar;
     }
 
+    public void andar() {
+        System.out.println("andando");
+    }
+
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Reptil: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -31,7 +35,7 @@ public class Reptil extends Animal {
         if (this == reptil) {
             return true;
         }
-        if (reptil instanceof Reptil) {
+        if (!(reptil instanceof Reptil)) {
             return false;
         }
         Reptil outroReptil = (Reptil) reptil;
@@ -52,7 +56,6 @@ public class Reptil extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * andar.hashCode();
         hash = hash * getNome().hashCode();
         hash = hash * getEspecie().hashCode();
         hash = hash * getId() * 17;

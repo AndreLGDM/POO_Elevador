@@ -6,11 +6,9 @@ public class Ave extends Animal {
     protected String corDasPenas;
     protected String andar;
 
-    public Ave(int id, String nome, String especie, int andarDesejado, int peso, int temperatura, String cordapena) {
+    public Ave(int id, String nome, String especie, int andarDesejado, int peso, int temperatura, String corDaPena) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
-        this.corDasPenas = corDasPenas;
-        this.andar = andar;
-
+        this.corDasPenas = corDaPena;
     }
 
     public String getCorDasPenas() {
@@ -21,9 +19,14 @@ public class Ave extends Animal {
         return andar;
     }
 
+    public void andar() {
+        System.out.println("andando");
+    }
+
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Ave: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -38,7 +41,7 @@ public class Ave extends Animal {
         if (this == ave) {
             return true;
         }
-        if (ave instanceof Ave) {
+        if (!(ave instanceof Ave)) {
             return false;
         }
         Ave outrAve = (Ave) ave;
@@ -58,7 +61,6 @@ public class Ave extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * andar.hashCode();
         hash = hash * corDasPenas.hashCode();
         hash = hash * getNome().hashCode();
         hash = hash * getEspecie().hashCode();

@@ -138,7 +138,7 @@ public class Animal {
         if (this == animal) {
             return true;
         }
-        if (animal instanceof Animal) {
+        if (!(animal instanceof Animal)) {
             return false;
         }
         Animal outrAnimal = (Animal) animal;

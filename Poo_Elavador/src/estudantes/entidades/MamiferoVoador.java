@@ -7,16 +7,16 @@ public class MamiferoVoador extends Mamifero {
     public MamiferoVoador(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
             boolean peludo) {
         super(id, nome, especie, andarDesejado, peso, temperatura, peludo);
-        this.voar = voar;
     }
 
-    public String getVoar() {
-        return voar;
+    public void voar() {
+        System.out.println("voando");
     }
 
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Mamifero Voador: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -31,7 +31,7 @@ public class MamiferoVoador extends Mamifero {
         if (this == mamiferovoador) {
             return true;
         }
-        if (mamiferovoador instanceof MamiferoVoador) {
+        if (!(mamiferovoador instanceof MamiferoVoador)) {
             return false;
         }
         MamiferoVoador outromamifero = (MamiferoVoador) mamiferovoador;

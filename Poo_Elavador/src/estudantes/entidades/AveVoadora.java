@@ -8,16 +8,16 @@ public class AveVoadora extends Ave {
     public AveVoadora(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
             String cordepena) {
         super(id, nome, especie, andarDesejado, peso, temperatura, especie);
-        this.voar = voar;
     }
 
-    public String getVoar() {
-        return voar;
+    public void voar() {
+        System.out.println("voando");
     }
 
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Ave Voadora: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -32,7 +32,7 @@ public class AveVoadora extends Ave {
         if (this == ave) {
             return true;
         }
-        if (ave instanceof AveVoadora) {
+        if (!(ave instanceof AveVoadora)) {
             return false;
         }
         AveVoadora outrAve = (AveVoadora) ave;

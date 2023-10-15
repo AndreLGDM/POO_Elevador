@@ -3,30 +3,27 @@ package estudantes.entidades;
 public class Anfibio extends Animal {
 
     private final int PACIENCIA_MAXIMA = 45;
-    private String andar;
-    private String nadar;
 
     public Anfibio(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
-        this.andar = andar;
-        this.nadar = nadar;
     }
 
     public int getPACIENCIA_MAXIMA() {
         return PACIENCIA_MAXIMA;
     }
 
-    public String getAndar() {
-        return andar;
+    public void andar() {
+        System.out.println("andando");
     }
 
-    public String getNadar() {
-        return nadar;
+    public void nadar() {
+        System.out.println("nadando");
     }
 
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Anfibio: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -41,7 +38,7 @@ public class Anfibio extends Animal {
         if (this == anfibio) {
             return true;
         }
-        if (anfibio instanceof Ave) {
+        if (!(anfibio instanceof Anfibio)) {
             return false;
         }
         Anfibio outrAnfibio = (Anfibio) anfibio;
@@ -50,8 +47,7 @@ public class Anfibio extends Animal {
                 && this.getPeso() == outrAnfibio.getPeso()
                 && this.getAndarDesejado() == outrAnfibio.getAndarDesejado()
                 && this.getTempoDeEspera() == outrAnfibio.getTempoDeEspera()
-                && this.getTemperaturaIdeal() == outrAnfibio.getTemperaturaIdeal()
-                && this.nadar.equals(outrAnfibio.nadar)) {
+                && this.getTemperaturaIdeal() == outrAnfibio.getTemperaturaIdeal()) {
             return true;
         } else {
             return false;
@@ -61,8 +57,6 @@ public class Anfibio extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * nadar.hashCode();
-        hash = hash * andar.hashCode();
         hash = hash * getNome().hashCode();
         hash = hash * getEspecie().hashCode();
         hash = hash * getId() * 17;

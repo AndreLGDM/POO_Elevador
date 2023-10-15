@@ -21,7 +21,7 @@ abstract class Mamifero extends Animal {
         if (this == mamifero) {
             return true;
         }
-        if (mamifero instanceof Mamifero) {
+        if (!(mamifero instanceof Mamifero)) {
             return false;
         }
         Mamifero outroMamifero = (Mamifero) mamifero;

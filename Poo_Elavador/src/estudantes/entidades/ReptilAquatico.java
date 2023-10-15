@@ -6,16 +6,20 @@ public class ReptilAquatico extends Reptil {
 
     public ReptilAquatico(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
-        this.nadar = nadar;
     }
 
     public String getNadar() {
         return nadar;
     }
 
+    public void nadar() {
+        System.out.println("nadando");
+    }
+
     @Override
     public String toString() {
-        return "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome() + " especie: "
+        return "Reptil Aquatico: " + "PACIENCIA_MAXIMA: " + PACIENCIA_MAXIMA + " ID: " + getId() + " Nome: " + getNome()
+                + " especie: "
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
@@ -30,7 +34,7 @@ public class ReptilAquatico extends Reptil {
         if (this == reptil) {
             return true;
         }
-        if (reptil instanceof Reptil) {
+        if (!(reptil instanceof ReptilAquatico)) {
             return false;
         }
         ReptilAquatico outroReptil = (ReptilAquatico) reptil;
@@ -50,7 +54,6 @@ public class ReptilAquatico extends Reptil {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * nadar.hashCode();
         hash = hash * getNome().hashCode();
         hash = hash * getEspecie().hashCode();
         hash = hash * getId() * 17;

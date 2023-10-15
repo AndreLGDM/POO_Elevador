@@ -44,10 +44,45 @@ public class Ascensorista {
      */
     public void agir(Elevador elevador, Andar andar) {
         Animal[] animal = new Animal[100];
+        Animal[] embarcados = new Animal[100];
+        int peso = 0;
         animal = andar.checarFilaParaElevador();
-        for (int i = 0; i < animal.length; i++) {
-            System.out.println(animal[i]);
+        embarcados = elevador.checarAnimaisNoElevador();
+        for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
+            if (animal[0] instanceof Ave || animal[0] instanceof MamiferoTerrestre
+                    || animal[0] instanceof MamiferoVoador || animal[0] instanceof Reptil) {
+                for (int j = 0; j < andar.consultarTamanhoDaFila(); j++) {
+                    if (animal[j] instanceof Anfibio || animal[j] instanceof Ave
+                            || animal[j] instanceof MamiferoTerrestre
+                            || animal[j] instanceof MamiferoVoador || animal[j] instanceof Reptil) {
+                        animal = elevador.checarAnimaisNoElevador();
+                        for (Animal animaisElevador : animal) {
+                            peso += animaisElevador.getPeso();
+                        }
+                        if (elevador.LIMITE_DE_PESO > peso) {
+                            elevador.embarcar(animal[j]);
+                            andar.tirarDaFila(i);
+                        }
+
+                    }
+                }
+            }
+            if (animal[0] instanceof MamiferoAquatico
+                    || animal[0] instanceof Peixe || animal[0] instanceof ReptilAquatico) {
+                for (int j = 0; j < andar.consultarTamanhoDaFila(); j++) {
+                    if (animal[j] instanceof Anfibio || animal[j] instanceof MamiferoAquatico
+                            || animal[j] instanceof Peixe || animal[j] instanceof ReptilAquatico) {
+                        animal = elevador.checarAnimaisNoElevador();
+                        for (Animal animaisElevador : animal) {
+                            peso += animaisElevador.getPeso();
+                        }
+                        if (elevador.LIMITE_DE_PESO > peso) {
+                            elevador.embarcar(animal[j]);
+                            andar.tirarDaFila(i);
+                        }
+                    }
+                }
+            }
         }
     }
-
 }
