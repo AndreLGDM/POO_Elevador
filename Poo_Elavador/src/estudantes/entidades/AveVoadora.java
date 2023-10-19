@@ -3,7 +3,6 @@ package estudantes.entidades;
 public class AveVoadora extends Ave {
 
     private int PACIENCIA_MAXIMA = 20;
-    private String voar;
 
     public AveVoadora(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
             String cordepena) {
@@ -43,9 +42,7 @@ public class AveVoadora extends Ave {
                 && this.getAndarDesejado() == outrAve.getAndarDesejado()
                 && this.getTempoDeEspera() == outrAve.getTempoDeEspera()
                 && this.getTemperaturaIdeal() == outrAve.getTemperaturaIdeal()
-                && this.andar.equals(outrAve.andar)
-                && this.corDasPenas.equals(outrAve.corDasPenas)
-                && this.voar.equals(outrAve.voar)) {
+                && this.corDasPenas.equals(outrAve.corDasPenas)) {
             return true;
         } else {
             return false;
@@ -55,8 +52,6 @@ public class AveVoadora extends Ave {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * voar.hashCode();
-        hash = hash * andar.hashCode();
         hash = hash * corDasPenas.hashCode();
         hash = hash * getNome().hashCode();
         hash = hash * getEspecie().hashCode();

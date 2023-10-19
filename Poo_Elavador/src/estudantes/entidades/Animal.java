@@ -54,8 +54,8 @@ public class Animal {
         this.especie = especie;
         this.peso = peso;
         this.andarDesejado = andarDesejado;
-        // this.tempoDeEspera = tempoDeEspera;
-        // this.temperaturaIdeal = temperaturaIdeal;
+        this.temperaturaIdeal = temperatura;
+        this.tempoDeEspera = 0;
     }
 
     public String getNome() {
@@ -117,8 +117,12 @@ public class Animal {
      */
     public void aumentaEspera() {
         tempoDeEspera++;
-        if (PACIENCIA_MAXIMA < tempoDeEspera) {
-            throw new RuntimeException("Tempo de Espera excedeu a paciência!");
+        try {
+            if (tempoDeEspera > PACIENCIA_MAXIMA) {
+                throw new RuntimeException("Animal está esperando a mais tempo que a paciência.");
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Animal foi embora! Esgotou a paciência.");
         }
     }
 

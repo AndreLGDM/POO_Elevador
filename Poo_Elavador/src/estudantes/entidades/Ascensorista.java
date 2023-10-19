@@ -17,6 +17,8 @@ import professor.entidades.Elevador;
  */
 public class Ascensorista {
 
+    private int andarAnterior;
+
     /**
      * Construtor padrão de Ascensorista.
      * Esse construtor sem parâmetros que será usado pela Arca. Embora a
@@ -24,6 +26,184 @@ public class Ascensorista {
      * ser alterado conforme a necessidade.
      */
     public Ascensorista() {
+        andarAnterior = 0;
+    }
+
+    private boolean verificarTipoTerrestre(Animal[] vetor) {
+        Class<?>[] classes_alvo = { Ave.class, AveVoadora.class, MamiferoTerrestre.class, MamiferoVoador.class,
+                Reptil.class };
+
+        if (vetor.length > 0) {
+            Animal animal = vetor[0];
+            for (Class<?> classe : classes_alvo) {
+                if (classe.isInstance(animal))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean VerificarElevadorVazio(Elevador elevador) {
+        Animal[] embarcados = elevador.checarAnimaisNoElevador();
+        if (embarcados.length == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean verificarTemperatura(Animal animal, Elevador elevador) {
+        if ((animal.getTemperaturaIdeal() + 15) >= elevador.getTemperaturaDoArCondicionado()
+                && (animal.getTemperaturaIdeal() - 15) <= elevador.getTemperaturaDoArCondicionado()) {
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * Percorre um vetor de Animal embarcados e verifica se o peso excede o limite
+     * de peso do elevador
+     */
+    private boolean verificarPeso(Elevador elevador, Animal animal) {
+        int peso = 0;
+        Animal[] animaisElevador = elevador.checarAnimaisNoElevador();
+        for (Animal animaisNoElevador : animaisElevador) {
+            peso += animaisNoElevador.getPeso();
+        }
+        if (peso + animal.getPeso() < elevador.LIMITE_DE_PESO) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Percorre um vetor de Animal embarcados e faz a media de temperatura ideal.
+     * Muda a temperatura do elevador para a mais adequada.
+     * <br>
+     * !!!Cuidado, se algum animal morrer, o motivo pode estar aqui!!!
+     */
+    private void ajustarTemperaturaElevador(Elevador elevador) {
+        Animal[] embarcados = elevador.checarAnimaisNoElevador();
+        int temperaturaIdealSoma = 0;
+        int mediaTemperatura = 0;
+        if (embarcados.length > 1) {
+            for (Animal animaisNoElevador : embarcados) {
+                temperaturaIdealSoma += animaisNoElevador.getTemperaturaIdeal();
+                mediaTemperatura = temperaturaIdealSoma / embarcados.length;
+            }
+            elevador.setTemperaturaDoArCondicionado(mediaTemperatura);
+        }
+    }
+
+    private boolean verificaSubindo(Elevador elevador) {
+        int andarAtual = elevador.getAndar();
+        if (andarAtual != 4 && andarAtual > andarAnterior || andarAtual == 0) {
+            andarAnterior = andarAtual;
+            return true;
+        }
+        andarAnterior = andarAtual;
+        return false;
+    }
+
+    private boolean verificarIntencao(Elevador elevador, Animal animal) {
+        if (verificaSubindo(elevador)) {
+            if (animal.getAndarDesejado() >= elevador.getAndar()) {
+                return true;
+            }
+            return false;
+
+        } else {
+            if (animal.getAndarDesejado() <= elevador.getAndar()) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private Animal verificarPaciencia(Animal[] vetor) {
+        Animal[] animalSelecionadoVetor = new Animal[vetor.length];
+        Animal animalSelecionadoFinal = null;
+        int cont = 0;
+        for (Animal animalSelecionado : vetor) {
+            animalSelecionadoVetor[cont] = animalSelecionado;
+            animalSelecionadoFinal = animalSelecionadoVetor[0];
+            if (cont != 0) {
+                if ((animalSelecionadoFinal.PACIENCIA_MAXIMA
+                        - animalSelecionadoFinal.getTempoDeEspera()) > (animalSelecionadoVetor[cont].PACIENCIA_MAXIMA
+                                - animalSelecionadoVetor[cont]
+                                        .getTempoDeEspera())) {
+                    animalSelecionadoFinal = animalSelecionadoVetor[cont];
+                }
+            }
+            cont++;
+        }
+        return animalSelecionadoFinal;
+    }
+
+    private void embarcarTerrestre(Elevador elevador, Andar andar) {
+
+        Animal[] vetorAnimais = andar.checarFilaParaElevador();
+        Animal[] animaisSelecionados = new Animal[vetorAnimais.length];
+        Animal animalSelecionado = null;
+        int cont = 0;
+
+        Class<?>[] classes_alvo = { Ave.class, AveVoadora.class, MamiferoTerrestre.class, MamiferoVoador.class,
+                Reptil.class, Anfibio.class, ReptilAquatico.class };
+        if (vetorAnimais.length > 0) {
+            for (Animal animalFila : vetorAnimais) {
+                for (Class<?> classe : classes_alvo) {
+                    if (classe.isInstance(animalFila)) {
+                        animaisSelecionados[cont] = animalFila;
+                    }
+                }
+                animalSelecionado = (Animal) animaisSelecionados[cont];
+                elevador.drenar();
+                if (verificarTemperatura(animalSelecionado, elevador)
+                        && verificarPeso(elevador, animalSelecionado)
+                        && verificarIntencao(elevador, animalSelecionado)) {
+                    elevador.embarcar(animalSelecionado);
+                    andar.tirarDaFila(animalSelecionado);
+                }
+                cont++;
+            }
+        }
+    }
+
+    private void embarcarAquatico(Elevador elevador, Andar andar) {
+        Animal[] vetorAnimais = andar.checarFilaParaElevador();
+        Animal[] animaisSelecionados = new Animal[vetorAnimais.length];
+        Animal[] animaisRemovidos = new Animal[animaisSelecionados.length];
+        Animal animalSelecionado = null;
+        int cont = 0;
+        int cont2 = 0;
+
+        Class<?>[] classes_alvo = { MamiferoAquatico.class, Peixe.class, ReptilAquatico.class, Anfibio.class };
+        if (vetorAnimais.length > 0) {
+            for (Animal animalFila : vetorAnimais) {
+                for (Class<?> classe : classes_alvo) {
+                    if (classe.isInstance(animalFila)) {
+                        animaisSelecionados[cont] = animalFila;
+                        animalSelecionado = (Animal) animaisSelecionados[cont];
+                        elevador.encher();
+                        if (verificarTemperatura(animalSelecionado, elevador)
+                                && (verificarPeso(elevador, animalSelecionado))
+                                && verificarIntencao(elevador, animalSelecionado)) {
+                            elevador.embarcar(animalSelecionado);
+                        }
+                    }
+                }
+                cont++;
+            }
+        }
+    }
+
+    private void desembarcarAnimais(Elevador elevador, Andar andar) {
+        Animal[] vetorAnimais = elevador.checarAnimaisNoElevador();
+        for (Animal animalFila : vetorAnimais) {
+            if (animalFila.getAndarDesejado() == elevador.getAndar()) {
+                elevador.desembarcar(animalFila, andar);
+            }
+        }
     }
 
     /**
@@ -43,46 +223,187 @@ public class Ascensorista {
      * @param andar    o andar no qual o elevador está parado
      */
     public void agir(Elevador elevador, Andar andar) {
-        Animal[] animal = new Animal[100];
-        Animal[] embarcados = new Animal[100];
-        int peso = 0;
-        animal = andar.checarFilaParaElevador();
-        embarcados = elevador.checarAnimaisNoElevador();
-        for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
-            if (animal[0] instanceof Ave || animal[0] instanceof MamiferoTerrestre
-                    || animal[0] instanceof MamiferoVoador || animal[0] instanceof Reptil) {
-                for (int j = 0; j < andar.consultarTamanhoDaFila(); j++) {
-                    if (animal[j] instanceof Anfibio || animal[j] instanceof Ave
-                            || animal[j] instanceof MamiferoTerrestre
-                            || animal[j] instanceof MamiferoVoador || animal[j] instanceof Reptil) {
-                        animal = elevador.checarAnimaisNoElevador();
-                        for (Animal animaisElevador : animal) {
-                            peso += animaisElevador.getPeso();
-                        }
-                        if (elevador.LIMITE_DE_PESO > peso) {
-                            elevador.embarcar(animal[j]);
-                            andar.tirarDaFila(i);
-                        }
 
-                    }
+        if (elevador.getAndar() == 0 && andar.consultarTamanhoDaFila() > 0) {
+            Animal[] animalFila = andar.checarFilaParaElevador();
+            for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
+                System.out.println(animalFila[i]);
+            }
+            desembarcarAnimais(elevador, andar);
+            if (verificaSubindo(elevador)) {
+                if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
+                    embarcarTerrestre(elevador, andar);
+                    desembarcarAnimais(elevador, andar);
+                    ajustarTemperaturaElevador(elevador);
+                    elevador.subir();
+                } else {
+                    elevador.encher();
+                    embarcarAquatico(elevador, andar);
+                    desembarcarAnimais(elevador, andar);
+                    ajustarTemperaturaElevador(elevador);
+                    elevador.subir();
                 }
             }
-            if (animal[0] instanceof MamiferoAquatico
-                    || animal[0] instanceof Peixe || animal[0] instanceof ReptilAquatico) {
-                for (int j = 0; j < andar.consultarTamanhoDaFila(); j++) {
-                    if (animal[j] instanceof Anfibio || animal[j] instanceof MamiferoAquatico
-                            || animal[j] instanceof Peixe || animal[j] instanceof ReptilAquatico) {
-                        animal = elevador.checarAnimaisNoElevador();
-                        for (Animal animaisElevador : animal) {
-                            peso += animaisElevador.getPeso();
-                        }
-                        if (elevador.LIMITE_DE_PESO > peso) {
-                            elevador.embarcar(animal[j]);
-                            andar.tirarDaFila(i);
-                        }
+
+        } else if (elevador.getAndar() > 0 && elevador.getAndar() < 4) {
+            Animal[] animalFila = andar.checarFilaParaElevador();
+            for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
+                System.out.println(animalFila[i]);
+            }
+            desembarcarAnimais(elevador, andar);
+            if (VerificarElevadorVazio(elevador)) {
+                if (verificaSubindo(elevador)) {
+                    if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
+                        embarcarTerrestre(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.subir();
+                    } else {
+                        elevador.encher();
+                        embarcarAquatico(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.subir();
+                    }
+                } else {
+                    if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
+                        embarcarTerrestre(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.descer();
+                    } else {
+                        elevador.encher();
+                        embarcarAquatico(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.descer();
+                    }
+                }
+            } else {
+                if (verificaSubindo(elevador)) {
+                    if (!elevador.isCheioDeAgua()) {
+                        embarcarTerrestre(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.subir();
+                    } else {
+                        embarcarAquatico(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.subir();
+                    }
+                } else {
+                    if (!elevador.isCheioDeAgua()) {
+                        embarcarTerrestre(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.descer();
+                    } else {
+                        embarcarAquatico(elevador, andar);
+                        desembarcarAnimais(elevador, andar);
+                        ajustarTemperaturaElevador(elevador);
+                        elevador.descer();
                     }
                 }
             }
         }
+
+        if (elevador.getAndar() == 4) {
+            Animal[] animalFila = andar.checarFilaParaElevador();
+            for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
+                System.out.println(animalFila[i]);
+            }
+            desembarcarAnimais(elevador, andar);
+            if (verificaSubindo(elevador)) {
+                if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
+                    embarcarTerrestre(elevador, andar);
+                    desembarcarAnimais(elevador, andar);
+                    ajustarTemperaturaElevador(elevador);
+                    elevador.descer();
+                } else {
+                    elevador.encher();
+                    embarcarAquatico(elevador, andar);
+                    desembarcarAnimais(elevador, andar);
+                    ajustarTemperaturaElevador(elevador);
+                    elevador.descer();
+                }
+
+            }
+        }
+
     }
 }
+
+/*
+ * Animal[] animaisNaFila = new Animal[100];
+ * Animal[] embarcados = new Animal[100];
+ * int peso = 0;
+ * animaisNaFila = andar.checarFilaParaElevador();
+ * embarcados = elevador.checarAnimaisNoElevador();
+ * if (elevador.getAndar() == 0 && andar.consultarTamanhoDaFila() > 0) {
+ * for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
+ * System.out.println(animaisNaFila[i]);
+ * if (verificarTipoTerrestre(animaisNaFila)) {
+ * for (int j = 0; j < andar.consultarTamanhoDaFila(); j++) {
+ * if (animaisNaFila[j] instanceof Anfibio || animaisNaFila[j] instanceof Ave
+ * || animaisNaFila[j] instanceof MamiferoTerrestre
+ * || animaisNaFila[j] instanceof MamiferoVoador || animaisNaFila[j] instanceof
+ * Reptil) {
+ * embarcados = elevador.checarAnimaisNoElevador();
+ * for (Animal animaisElevador : embarcados) {
+ * peso += animaisElevador.getPeso();
+ * }
+ * if (elevador.LIMITE_DE_PESO > peso) {
+ * if (embarcados.equals(null) && (animaisNaFila[j].getTemperaturaIdeal() + 15)
+ * < elevador
+ * .getTemperaturaDoArCondicionado()
+ * || (animaisNaFila[j].getTemperaturaIdeal() - 15) > elevador
+ * .getTemperaturaDoArCondicionado()) {
+ * elevador.setTemperaturaDoArCondicionado(animaisNaFila[j].getTemperaturaIdeal(
+ * ));
+ * elevador.embarcar(animaisNaFila[j]);
+ * andar.tirarDaFila(j);
+ * elevador.subir();
+ * } else if (!embarcados.equals(null)
+ * && (animaisNaFila[j].getTemperaturaIdeal() + 15) < elevador
+ * .getTemperaturaDoArCondicionado()
+ * || (animaisNaFila[j].getTemperaturaIdeal() - 15) > elevador
+ * .getTemperaturaDoArCondicionado()) {
+ * andar.chamarProximoDaFila();
+ * }
+ * }
+ * }
+ * }
+ * }
+ * if (animaisNaFila[0] instanceof MamiferoAquatico
+ * || animaisNaFila[0] instanceof Peixe || animaisNaFila[0] instanceof
+ * ReptilAquatico) {
+ * for (int j = 0; j < andar.consultarTamanhoDaFila(); j++) {
+ * if (animaisNaFila[j] instanceof Anfibio || animaisNaFila[j] instanceof
+ * MamiferoAquatico
+ * || animaisNaFila[j] instanceof Peixe || animaisNaFila[j] instanceof
+ * ReptilAquatico) {
+ * embarcados = elevador.checarAnimaisNoElevador();
+ * for (Animal animaisElevador : embarcados) {
+ * peso += animaisElevador.getPeso();
+ * }
+ * if (elevador.LIMITE_DE_PESO > peso) {
+ * elevador.encher();
+ * if (elevador.isCheioDeAgua()) {
+ * elevador.embarcar(animaisNaFila[j]);
+ * andar.tirarDaFila(j);
+ * }
+ * elevador.subir();
+ * }
+ * }
+ * }
+ * }
+ * }
+ * }
+ * if (elevador.getAndar() != 0 && elevador.getAndar() < 4) {
+ * animaisNaFila = andar.checarFilaParaElevador();
+ * if (!elevador.isCheioDeAgua()) {
+ * 
+ * }
+ * }
+ */
