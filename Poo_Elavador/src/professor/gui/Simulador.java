@@ -51,7 +51,7 @@ public class Simulador extends javax.swing.JFrame {
         if (arca.getElevador().isCheioDeAgua()) {
             elevador.setBackground(new Color(150, 255, 255));
         } else {
-            elevador.setBackground(new Color(200, 200, 200));
+            elevador.setBackground(new Color(150, 75, 0));
         }
 
         // atualiza os animais nas filas
@@ -60,7 +60,11 @@ public class Simulador extends javax.swing.JFrame {
                 Animal[] a = arca.getAndares()[i].checarFilaParaElevador();
                 String label = "";
                 for (int j = a.length - 1; j >= 0; j--) {
+<<<<<<< HEAD
                     label += a[j].getClass() + " " + a[j].getAndarDesejado() + " -> ";
+=======
+                    label += a[j].getClass() + " -> ";
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
                 }
                 switch (i) {
                     case 0 -> labelAndar0.setText(label);

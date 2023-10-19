@@ -14,6 +14,7 @@ import java.util.HashSet;
  */
 public class Elevador {
 
+<<<<<<< HEAD
     /**
      * Enumeração dos movimentos do elevador.
      * O elevador só vai se mover quando acionado pela Arca.
@@ -24,12 +25,15 @@ public class Elevador {
         DESCER, PARADO, SUBIR
     };
 
+=======
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
     /**
      * Limite de peso do elevador.
      * Quando esse valor é ultrapassado, o elevador não deve se movimentar.
      */
     public final int LIMITE_DE_PESO = 2500; // em quilos
 
+<<<<<<< HEAD
     public HashSet<Animal> animais;
     public int andar; // 0 é o térreo
     public Movimento proximo; // indica se vai ficar parado, vai subir ou vai descer
@@ -40,13 +44,28 @@ public class Elevador {
      * Construtor padrão do elevador.
      * Ele sempre começa vazio, sem água dentro, com ar-condicionado em
      * 20 graus, no andar 0 (térreo) e próximo movimento PARADO.
+=======
+    private HashSet<Animal> animais;
+    private int andar; // 0 é o térreo
+    private int temperaturaDoArCondicionado; // em graus Celsius
+    private boolean cheioDeAgua;
+
+    /**
+     * Construtor padrão do elevador.
+     * Ele sempre começa vazio, sem água dentro, no andar 0 (térreo) e com
+     * temperatura de 20°.
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
      */
     public Elevador() {
         animais = new HashSet<Animal>();
         andar = 0;
         temperaturaDoArCondicionado = 20;
         cheioDeAgua = false;
+<<<<<<< HEAD
         proximo = Movimento.PARADO;
+=======
+        temperaturaDoArCondicionado = 20;
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
     }
 
     /**
@@ -57,7 +76,11 @@ public class Elevador {
      * @param animal animal que quer embarcar (um valor null será ignorado)
      */
     public void embarcar(Animal animal) {
+<<<<<<< HEAD
         // System.out.println("Embarque no andar "+this.andar+": "+animal);
+=======
+        System.out.println("Embarque no andar " + this.andar + ": " + animal);
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         if (animal == null) {
             return;
         }
@@ -72,7 +95,11 @@ public class Elevador {
      * @param andar  andar que está descendo
      */
     public void desembarcar(Animal animal, Andar andar) {
+<<<<<<< HEAD
         // System.out.println("Desembarque no andar "+this.andar+": "+animal);
+=======
+        System.out.println("Desembarque no andar " + this.andar + ": " + animal);
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         andar.desembarcar(animal);
         animais.remove(animal);
     }
@@ -103,6 +130,7 @@ public class Elevador {
     public int getAndar() {
         return andar;
     }
+<<<<<<< HEAD
 
     /**
      * Movimentar o elevador.
@@ -154,6 +182,55 @@ public class Elevador {
      */
     public void descer() {
         proximo = Movimento.DESCER;
+=======
+
+    /**
+     * Faz o elevador subir um andar imediatamente.
+     * O tempo é relativo na Arca de Noé, então subir com o elevador tem efeito
+     * imediato. A verificação nesse método lança uma exceção se o elevador
+     * tentar subir para um andar inválido (acima do limite da arca - andar 4).
+     * Além disso, o elevador não vai subir se o peso dos animais dentro dele
+     * exceder a capacidade máxima do elevador.
+     * 
+     * @throws RuntimeException se o elevador tenta passar do último andar
+     */
+    public void subir() {
+        if (andar < Arca.QUANTIDADE_DE_ANDARES_NA_ARCA - 1) {
+            int peso = 0;
+            for (Animal animalNoElevador : animais) {
+                peso += animalNoElevador.getPeso();
+            }
+            if (peso <= LIMITE_DE_PESO) {
+                andar++;
+            }
+        } else {
+            throw new RuntimeException("Elevador no ultimo andar e tentando subir");
+        }
+    }
+
+    /**
+     * Faz o elevador descer um andar imediatamente.
+     * O tempo é relativo na Arca de Noé, então descer com o elevador tem efeito
+     * imediato. A verificação nesse método lança uma exceção se o elevador
+     * tentar descer para um andar inválido (abaixo do térreo - andar 0).
+     * Além disso, o elevador não vai descer se o peso dos animais dentro dele
+     * exceder a capacidade máxima do elevador.
+     * 
+     * @throws RuntimeException se o elevador tenta descer abaixo do térreo
+     */
+    public void descer() {
+        if (andar > 0) {
+            int peso = 0;
+            for (Animal animalNoElevador : animais) {
+                peso += animalNoElevador.getPeso();
+            }
+            if (peso <= LIMITE_DE_PESO) {
+                andar--;
+            }
+        } else {
+            throw new RuntimeException("Elevador no terreo e tentando descer");
+        }
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
     }
 
     /**

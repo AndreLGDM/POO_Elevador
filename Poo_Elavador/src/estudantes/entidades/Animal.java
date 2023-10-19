@@ -117,9 +117,18 @@ public class Animal {
      */
     public void aumentaEspera() {
         tempoDeEspera++;
+<<<<<<< HEAD
 
         if (tempoDeEspera > PACIENCIA_MAXIMA) {
             throw new RuntimeException("Animal está esperando a mais tempo que a paciência.");
+=======
+        try {
+            if (tempoDeEspera > PACIENCIA_MAXIMA) {
+                throw new RuntimeException("Animal está esperando a mais tempo que a paciência.");
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Animal foi embora! Esgotou a paciência.");
+>>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         }
 
     }
