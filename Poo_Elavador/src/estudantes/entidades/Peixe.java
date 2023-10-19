@@ -1,21 +1,17 @@
 package estudantes.entidades;
 
 public class Peixe extends Animal {
-    private int PACIENCIA_MAXIMA = 60;
+    public int PACIENCIA_MAXIMA = 60;
     private String corDasEscamas;
 
     public Peixe(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
             String cordaescama) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
-        this.corDasEscamas = corDasEscamas;
+        this.corDasEscamas = cordaescama;
     }
 
-    public String getCorDasEscamas() {
-        return corDasEscamas;
-    }
-
-    public void nadar() {
-        System.out.println("nadando");
+    public String nadar() {
+        return "nadando";
     }
 
     @Override
@@ -25,7 +21,7 @@ public class Peixe extends Animal {
                 + getEspecie() + " peso: " + getPeso()
                 + " Andar desejado: " + getAndarDesejado() + " tempo de espera: " + getTempoDeEspera()
                 + " temperatura ideal: "
-                + getTemperaturaIdeal();
+                + getTemperaturaIdeal() + " cor das escamas: " + corDasEscamas;
     }
 
     @Override
@@ -47,7 +43,7 @@ public class Peixe extends Animal {
                 && this.getAndarDesejado() == outropeixe.getAndarDesejado()
                 && this.getTempoDeEspera() == outropeixe.getTempoDeEspera()
                 && this.getTemperaturaIdeal() == outropeixe.getTemperaturaIdeal()
-                && this.corDasEscamas.equals(outropeixe.corDasEscamas)) {
+                && this.corDasEscamas == outropeixe.corDasEscamas) {
             return true;
         } else {
             return false;
@@ -57,14 +53,14 @@ public class Peixe extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * corDasEscamas.hashCode();
-        hash = hash * getNome().hashCode();
-        hash = hash * getEspecie().hashCode();
-        hash = hash * getId() * 17;
-        hash = hash * getPeso() * 23;
-        hash = hash * getAndarDesejado() * 29;
-        hash = hash * getTemperaturaIdeal() * 31;
-        hash = hash * getTempoDeEspera() * 37;
+        hash = hash + getNome().hashCode();
+        hash = hash + getEspecie().hashCode();
+        hash = hash + getId() * 17;
+        hash = hash + getPeso() * 23;
+        hash = hash + getAndarDesejado() * 29;
+        hash = hash + getTemperaturaIdeal() * 31;
+        hash = hash + getTempoDeEspera() * 37;
+        hash = hash + corDasEscamas.hashCode();
         return hash;
     }
 

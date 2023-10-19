@@ -3,6 +3,7 @@ package professor.gui;
 import estudantes.entidades.Animal;
 import professor.entidades.Arca;
 import java.awt.Color;
+import java.util.TimerTask;
 
 /**
  * Simulador gráfico da arca de Noé.
@@ -16,6 +17,7 @@ import java.awt.Color;
 public class Simulador extends javax.swing.JFrame {
 
     private Arca arca;
+    private static TimerTask tarefa;
     private static Simulador instancia;
 
     /**
@@ -26,6 +28,10 @@ public class Simulador extends javax.swing.JFrame {
      */
     public void simular() {
         arca.simularVida();
+    }
+
+    public static void pararSimulacao() {
+        tarefa.cancel();
     }
 
     /**
@@ -54,7 +60,7 @@ public class Simulador extends javax.swing.JFrame {
                 Animal[] a = arca.getAndares()[i].checarFilaParaElevador();
                 String label = "";
                 for (int j = a.length - 1; j >= 0; j--) {
-                    label += a[j].getNome() + " -> ";
+                    label += a[j].getClass() + " " + a[j].getAndarDesejado() + " -> ";
                 }
                 switch (i) {
                     case 0 -> labelAndar0.setText(label);
@@ -328,16 +334,17 @@ public class Simulador extends javax.swing.JFrame {
             Simulador.getInstancia().setVisible(true);
         });
 
+        tarefa = new TimerTask() {
+            @Override
+            public void run() {
+                Simulador.getInstancia().simular();
+            }
+        };
+
         /*
          * invoca simular() de 1 em 1 segundo com atraso de 3 segundos na primeira vez
          */
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        Simulador.getInstancia().simular();
-                    }
-                }, 3000, 1000);
+        new java.util.Timer().schedule(tarefa, 3000, 1000);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

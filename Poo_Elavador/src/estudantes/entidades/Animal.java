@@ -54,8 +54,8 @@ public class Animal {
         this.especie = especie;
         this.peso = peso;
         this.andarDesejado = andarDesejado;
-        // this.tempoDeEspera = tempoDeEspera;
-        // this.temperaturaIdeal = temperaturaIdeal;
+        this.temperaturaIdeal = temperatura;
+        this.tempoDeEspera = 0;
     }
 
     public String getNome() {
@@ -117,9 +117,11 @@ public class Animal {
      */
     public void aumentaEspera() {
         tempoDeEspera++;
-        if (PACIENCIA_MAXIMA < tempoDeEspera) {
-            throw new RuntimeException("Tempo de Espera excedeu a paciência!");
+
+        if (tempoDeEspera > PACIENCIA_MAXIMA) {
+            throw new RuntimeException("Animal está esperando a mais tempo que a paciência.");
         }
+
     }
 
     @Override
@@ -155,13 +157,13 @@ public class Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * nome.hashCode();
-        hash = hash * especie.hashCode();
-        hash = hash * id * 17;
-        hash = hash * peso * 23;
-        hash = hash * andarDesejado * 29;
-        hash = hash * temperaturaIdeal * 31;
-        hash = hash * tempoDeEspera * 37;
+        hash = hash + nome.hashCode();
+        hash = hash + especie.hashCode();
+        hash = hash + id * 17;
+        hash = hash + peso * 23;
+        hash = hash + andarDesejado * 29;
+        hash = hash + temperaturaIdeal * 31;
+        hash = hash + tempoDeEspera * 37;
         return hash;
 
     }

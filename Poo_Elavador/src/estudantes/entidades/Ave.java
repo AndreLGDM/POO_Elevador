@@ -2,9 +2,8 @@ package estudantes.entidades;
 
 public class Ave extends Animal {
 
-    private final int PACIENCIA_MAXIMA = 30;
-    protected String corDasPenas;
-    protected String andar;
+    public final int PACIENCIA_MAXIMA = 30;
+    private String corDasPenas;
 
     public Ave(int id, String nome, String especie, int andarDesejado, int peso, int temperatura, String corDaPena) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
@@ -15,12 +14,8 @@ public class Ave extends Animal {
         return corDasPenas;
     }
 
-    public String getandar() {
-        return andar;
-    }
-
-    public void andar() {
-        System.out.println("andando");
+    public String andar() {
+        return "andando";
     }
 
     @Override
@@ -61,14 +56,14 @@ public class Ave extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * corDasPenas.hashCode();
-        hash = hash * getNome().hashCode();
-        hash = hash * getEspecie().hashCode();
-        hash = hash * getId() * 17;
-        hash = hash * getPeso() * 23;
-        hash = hash * getAndarDesejado() * 29;
-        hash = hash * getTemperaturaIdeal() * 31;
-        hash = hash * getTempoDeEspera() * 37;
+        hash = hash + corDasPenas.hashCode();
+        hash = hash + getNome().hashCode();
+        hash = hash + getEspecie().hashCode();
+        hash = hash + getId() * 17;
+        hash = hash + getPeso() * 23;
+        hash = hash + getAndarDesejado() * 29;
+        hash = hash + getTemperaturaIdeal() * 31;
+        hash = hash + getTempoDeEspera() * 37;
         return hash;
     }
 }

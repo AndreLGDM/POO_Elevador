@@ -2,19 +2,14 @@ package estudantes.entidades;
 
 public class Reptil extends Animal {
 
-    private final int PACIENCIA_MAXIMA = 10;
-    private String andar;
+    public final int PACIENCIA_MAXIMA = 10;
 
     public Reptil(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
     }
 
-    public String getAndar() {
-        return andar;
-    }
-
-    public void andar() {
-        System.out.println("andando");
+    public String andar() {
+        return "andando";
     }
 
     @Override
@@ -45,8 +40,7 @@ public class Reptil extends Animal {
                 && this.getPeso() == outroReptil.getPeso()
                 && this.getAndarDesejado() == outroReptil.getAndarDesejado()
                 && this.getTempoDeEspera() == outroReptil.getTempoDeEspera()
-                && this.getTemperaturaIdeal() == outroReptil.getTemperaturaIdeal()
-                && this.andar.equals(outroReptil.andar)) {
+                && this.getTemperaturaIdeal() == outroReptil.getTemperaturaIdeal()) {
             return true;
         } else {
             return false;
@@ -56,13 +50,13 @@ public class Reptil extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * getNome().hashCode();
-        hash = hash * getEspecie().hashCode();
-        hash = hash * getId() * 17;
-        hash = hash * getPeso() * 23;
-        hash = hash * getAndarDesejado() * 29;
-        hash = hash * getTemperaturaIdeal() * 31;
-        hash = hash * getTempoDeEspera() * 37;
+        hash = hash + getNome().hashCode();
+        hash = hash + getEspecie().hashCode();
+        hash = hash + getId() * 17;
+        hash = hash + getPeso() * 23;
+        hash = hash + getAndarDesejado() * 29;
+        hash = hash + getTemperaturaIdeal() * 31;
+        hash = hash + getTempoDeEspera() * 37;
         return hash;
     }
 

@@ -2,7 +2,7 @@ package estudantes.entidades;
 
 abstract class Mamifero extends Animal {
 
-    protected boolean peludo;
+    private boolean peludo;
 
     public Mamifero(int id, String nome, String especie, int andarDesejado, int peso, int temperatura, boolean peludo) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
@@ -31,7 +31,8 @@ abstract class Mamifero extends Animal {
                 && this.getPeso() == outroMamifero.getPeso()
                 && this.getAndarDesejado() == outroMamifero.getAndarDesejado()
                 && this.getTempoDeEspera() == outroMamifero.getTempoDeEspera()
-                && this.getTemperaturaIdeal() == outroMamifero.getTemperaturaIdeal()) {
+                && this.getTemperaturaIdeal() == outroMamifero.getTemperaturaIdeal()
+                && this.peludo == outroMamifero.peludo) {
             return true;
         } else {
             return false;
@@ -41,13 +42,14 @@ abstract class Mamifero extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * getNome().hashCode();
-        hash = hash * getEspecie().hashCode();
-        hash = hash * getId() * 17;
-        hash = hash * getPeso() * 23;
-        hash = hash * getAndarDesejado() * 29;
-        hash = hash * getTemperaturaIdeal() * 31;
-        hash = hash * getTempoDeEspera() * 37;
+        hash = hash + getNome().hashCode();
+        hash = hash + getEspecie().hashCode();
+        hash = hash + getId() * 17;
+        hash = hash + getPeso() * 23;
+        hash = hash + getAndarDesejado() * 29;
+        hash = hash + getTemperaturaIdeal() * 31;
+        hash = hash + getTempoDeEspera() * 37;
+        hash = hash + (peludo ? 41 : 43);
         return hash;
     }
 }

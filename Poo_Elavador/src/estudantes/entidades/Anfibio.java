@@ -2,7 +2,7 @@ package estudantes.entidades;
 
 public class Anfibio extends Animal {
 
-    private final int PACIENCIA_MAXIMA = 45;
+    public final int PACIENCIA_MAXIMA = 45;
 
     public Anfibio(int id, String nome, String especie, int andarDesejado, int peso, int temperatura) {
         super(id, nome, especie, andarDesejado, peso, temperatura);
@@ -12,12 +12,12 @@ public class Anfibio extends Animal {
         return PACIENCIA_MAXIMA;
     }
 
-    public void andar() {
-        System.out.println("andando");
+    public String andar() {
+        return "andando";
     }
 
-    public void nadar() {
-        System.out.println("nadando");
+    public String nadar() {
+        return "nadando";
     }
 
     @Override
@@ -57,13 +57,13 @@ public class Anfibio extends Animal {
     @Override
     public int hashCode() {
         int hash = 13;
-        hash = hash * getNome().hashCode();
-        hash = hash * getEspecie().hashCode();
-        hash = hash * getId() * 17;
-        hash = hash * getPeso() * 23;
-        hash = hash * getAndarDesejado() * 29;
-        hash = hash * getTemperaturaIdeal() * 31;
-        hash = hash * getTempoDeEspera() * 37;
+        hash = hash + getNome().hashCode();
+        hash = hash + getEspecie().hashCode();
+        hash = hash + getId() * 17;
+        hash = hash + getPeso() * 23;
+        hash = hash + getAndarDesejado() * 29;
+        hash = hash + getTemperaturaIdeal() * 31;
+        hash = hash + getTempoDeEspera() * 37;
         return hash;
 
     }
