@@ -53,7 +53,7 @@ public class Arca {
      * valor dentro do limite de andares da arca.
      */
     public Arca() {
-        gerador = new Random(1);
+        gerador = new Random(10021984);
         elevador = new Elevador();
         andares = new Andar[QUANTIDADE_DE_ANDARES_NA_ARCA];
         for (int i = 0; i < QUANTIDADE_DE_ANDARES_NA_ARCA; i++) {

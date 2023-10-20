@@ -59,10 +59,6 @@ public class Ascensorista {
             return true;
         }
         return false;
-<<<<<<< HEAD
-=======
-
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
     }
 
     /**
@@ -87,9 +83,9 @@ public class Ascensorista {
      * <br>
      * !!!Cuidado, se algum animal morrer, o motivo pode estar aqui!!!
      */
-    private void ajustarTemperaturaElevador(Elevador elevador) {
+    private void ajustarTemperaturaElevador(Elevador elevador, Andar andar) {
         Animal[] embarcados = elevador.checarAnimaisNoElevador();
-<<<<<<< HEAD
+        Animal[] naoEmbarcados = andar.checarFilaParaElevador();
         int temperaturaIdealMenor = Integer.MAX_VALUE;
         int temperaturaIdealMaior = Integer.MIN_VALUE;
         int mediaTemperatura = 0;
@@ -99,13 +95,20 @@ public class Ascensorista {
             temperaturaIdealMenor = Math.min(temperaturaIdealMenor, temperaturaIdeal);
             temperaturaIdealMaior = Math.max(temperaturaIdealMaior, temperaturaIdeal);
         }
-        System.out.println(temperaturaIdealMaior);
-        System.out.println(temperaturaIdealMenor);
         if (embarcados.length > 0) {
             mediaTemperatura = (temperaturaIdealMenor + temperaturaIdealMaior) / 2;
             elevador.setTemperaturaDoArCondicionado(mediaTemperatura);
         } else {
-            elevador.setTemperaturaDoArCondicionado(20);
+            if (naoEmbarcados.length > 0) {
+                Animal animalAndar = naoEmbarcados[0];
+                if (animalAndar.getTemperaturaIdeal() > 40) {
+                    elevador.setTemperaturaDoArCondicionado(40);
+                } else if (animalAndar.getTemperaturaIdeal() < 0) {
+                    elevador.setTemperaturaDoArCondicionado(0);
+                } else {
+                    elevador.setTemperaturaDoArCondicionado(animalAndar.getTemperaturaIdeal());
+                }
+            }
         }
     }
 
@@ -118,26 +121,6 @@ public class Ascensorista {
         if (andarAtual > andarAnterior || andarAtual == 0) {
             return true;
         }
-=======
-        int temperaturaIdealSoma = 0;
-        int mediaTemperatura = 0;
-        if (embarcados.length > 1) {
-            for (Animal animaisNoElevador : embarcados) {
-                temperaturaIdealSoma += animaisNoElevador.getTemperaturaIdeal();
-                mediaTemperatura = temperaturaIdealSoma / embarcados.length;
-            }
-            elevador.setTemperaturaDoArCondicionado(mediaTemperatura);
-        }
-    }
-
-    private boolean verificaSubindo(Elevador elevador) {
-        int andarAtual = elevador.getAndar();
-        if (andarAtual != 4 && andarAtual > andarAnterior || andarAtual == 0) {
-            andarAnterior = andarAtual;
-            return true;
-        }
-        andarAnterior = andarAtual;
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         return false;
     }
 
@@ -156,7 +139,6 @@ public class Ascensorista {
         }
     }
 
-<<<<<<< HEAD
     private Animal[] verificarPaciencia(Animal[] vetor) {
         Animal[] lista = vetor.clone(); // Crie uma cópia do vetor original para não modificar o original
         Animal[] listaOrganizada = new Animal[lista.length];
@@ -178,35 +160,11 @@ public class Ascensorista {
         }
 
         return listaOrganizada;
-=======
-    private Animal verificarPaciencia(Animal[] vetor) {
-        Animal[] animalSelecionadoVetor = new Animal[vetor.length];
-        Animal animalSelecionadoFinal = null;
-        int cont = 0;
-        for (Animal animalSelecionado : vetor) {
-            animalSelecionadoVetor[cont] = animalSelecionado;
-            animalSelecionadoFinal = animalSelecionadoVetor[0];
-            if (cont != 0) {
-                if ((animalSelecionadoFinal.PACIENCIA_MAXIMA
-                        - animalSelecionadoFinal.getTempoDeEspera()) > (animalSelecionadoVetor[cont].PACIENCIA_MAXIMA
-                                - animalSelecionadoVetor[cont]
-                                        .getTempoDeEspera())) {
-                    animalSelecionadoFinal = animalSelecionadoVetor[cont];
-                }
-            }
-            cont++;
-        }
-        return animalSelecionadoFinal;
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
     }
 
     private void embarcarTerrestre(Elevador elevador, Andar andar) {
 
-<<<<<<< HEAD
         Animal[] vetorAnimais = verificarPaciencia(andar.checarFilaParaElevador());
-=======
-        Animal[] vetorAnimais = andar.checarFilaParaElevador();
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         Animal[] animaisSelecionados = new Animal[vetorAnimais.length];
         Animal animalSelecionado = null;
         int cont = 0;
@@ -218,7 +176,6 @@ public class Ascensorista {
                 for (Class<?> classe : classes_alvo) {
                     if (classe.isInstance(animalFila)) {
                         animaisSelecionados[cont] = animalFila;
-<<<<<<< HEAD
                         animalSelecionado = (Animal) animaisSelecionados[cont];
                         elevador.drenar();
                         if (verificarTemperatura(animalSelecionado, elevador)
@@ -232,35 +189,14 @@ public class Ascensorista {
                 cont++;
             }
             modificarAndar(elevador);
-=======
-                    }
-                }
-                animalSelecionado = (Animal) animaisSelecionados[cont];
-                elevador.drenar();
-                if (verificarTemperatura(animalSelecionado, elevador)
-                        && verificarPeso(elevador, animalSelecionado)
-                        && verificarIntencao(elevador, animalSelecionado)) {
-                    elevador.embarcar(animalSelecionado);
-                    andar.tirarDaFila(animalSelecionado);
-                }
-                cont++;
-            }
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         }
     }
 
     private void embarcarAquatico(Elevador elevador, Andar andar) {
         Animal[] vetorAnimais = andar.checarFilaParaElevador();
         Animal[] animaisSelecionados = new Animal[vetorAnimais.length];
-<<<<<<< HEAD
         Animal animalSelecionado = null;
         int cont = 0;
-=======
-        Animal[] animaisRemovidos = new Animal[animaisSelecionados.length];
-        Animal animalSelecionado = null;
-        int cont = 0;
-        int cont2 = 0;
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
 
         Class<?>[] classes_alvo = { MamiferoAquatico.class, Peixe.class, ReptilAquatico.class, Anfibio.class };
         if (vetorAnimais.length > 0) {
@@ -274,30 +210,19 @@ public class Ascensorista {
                                 && (verificarPeso(elevador, animalSelecionado))
                                 && verificarIntencao(elevador, animalSelecionado)) {
                             elevador.embarcar(animalSelecionado);
-<<<<<<< HEAD
                             andar.tirarDaFila(animalSelecionado);
-=======
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
                         }
                     }
                 }
-                cont++;
             }
-<<<<<<< HEAD
             modificarAndar(elevador);
-=======
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         }
     }
 
     private void desembarcarAnimais(Elevador elevador, Andar andar) {
         Animal[] vetorAnimais = elevador.checarAnimaisNoElevador();
         for (Animal animalFila : vetorAnimais) {
-<<<<<<< HEAD
             if (animalFila.getAndarDesejado() == andar.getAndar()) {
-=======
-            if (animalFila.getAndarDesejado() == elevador.getAndar()) {
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
                 elevador.desembarcar(animalFila, andar);
             }
         }
@@ -321,64 +246,50 @@ public class Ascensorista {
      */
     public void agir(Elevador elevador, Andar andar) {
 
-        if (elevador.getAndar() == 0 && andar.consultarTamanhoDaFila() > 0) {
-<<<<<<< HEAD
-=======
-            Animal[] animalFila = andar.checarFilaParaElevador();
-            for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
-                System.out.println(animalFila[i]);
-            }
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
+        if (elevador.getAndar() == 0) {
             desembarcarAnimais(elevador, andar);
             if (verificaSubindo(elevador)) {
                 if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
                     embarcarTerrestre(elevador, andar);
                     desembarcarAnimais(elevador, andar);
-                    ajustarTemperaturaElevador(elevador);
+                    ajustarTemperaturaElevador(elevador, andar);
                     elevador.subir();
                 } else {
                     elevador.encher();
                     embarcarAquatico(elevador, andar);
                     desembarcarAnimais(elevador, andar);
-                    ajustarTemperaturaElevador(elevador);
+                    ajustarTemperaturaElevador(elevador, andar);
                     elevador.subir();
                 }
             }
 
         } else if (elevador.getAndar() > 0 && elevador.getAndar() < 4) {
-<<<<<<< HEAD
-=======
-            Animal[] animalFila = andar.checarFilaParaElevador();
-            for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
-                System.out.println(animalFila[i]);
-            }
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
             desembarcarAnimais(elevador, andar);
             if (VerificarElevadorVazio(elevador)) {
                 if (verificaSubindo(elevador)) {
                     if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
                         embarcarTerrestre(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.subir();
                     } else {
                         elevador.encher();
                         embarcarAquatico(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.subir();
                     }
                 } else {
                     if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
                         embarcarTerrestre(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.descer();
                     } else {
                         elevador.encher();
                         embarcarAquatico(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.descer();
                     }
                 }
@@ -387,24 +298,24 @@ public class Ascensorista {
                     if (!elevador.isCheioDeAgua()) {
                         embarcarTerrestre(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.subir();
                     } else {
                         embarcarAquatico(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.subir();
                     }
                 } else {
                     if (!elevador.isCheioDeAgua()) {
                         embarcarTerrestre(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.descer();
                     } else {
                         embarcarAquatico(elevador, andar);
                         desembarcarAnimais(elevador, andar);
-                        ajustarTemperaturaElevador(elevador);
+                        ajustarTemperaturaElevador(elevador, andar);
                         elevador.descer();
                     }
                 }
@@ -412,34 +323,23 @@ public class Ascensorista {
         }
 
         if (elevador.getAndar() == 4) {
-<<<<<<< HEAD
+            modificarAndar(elevador);
             desembarcarAnimais(elevador, andar);
-            if (verificaSubindo(elevador)) {
-                if (!elevador.isCheioDeAgua()) {
-=======
-            Animal[] animalFila = andar.checarFilaParaElevador();
-            for (int i = 0; i < andar.consultarTamanhoDaFila(); i++) {
-                System.out.println(animalFila[i]);
-            }
-            desembarcarAnimais(elevador, andar);
-            if (verificaSubindo(elevador)) {
+            if (!verificaSubindo(elevador)) {
                 if (verificarTipoTerrestre(andar.checarFilaParaElevador())) {
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
                     embarcarTerrestre(elevador, andar);
                     desembarcarAnimais(elevador, andar);
-                    ajustarTemperaturaElevador(elevador);
+                    ajustarTemperaturaElevador(elevador, andar);
                     elevador.descer();
                 } else {
                     elevador.encher();
                     embarcarAquatico(elevador, andar);
                     desembarcarAnimais(elevador, andar);
-                    ajustarTemperaturaElevador(elevador);
+                    ajustarTemperaturaElevador(elevador, andar);
                     elevador.descer();
                 }
-
             }
         }
-
     }
 }
 

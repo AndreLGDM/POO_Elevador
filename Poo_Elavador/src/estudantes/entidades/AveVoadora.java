@@ -2,11 +2,7 @@ package estudantes.entidades;
 
 public class AveVoadora extends Ave {
 
-<<<<<<< HEAD
     public int PACIENCIA_MAXIMA = 20;
-=======
-    private int PACIENCIA_MAXIMA = 20;
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
 
     public AveVoadora(int id, String nome, String especie, int andarDesejado, int peso, int temperatura,
             String cordepena) {
@@ -46,11 +42,7 @@ public class AveVoadora extends Ave {
                 && this.getAndarDesejado() == outrAve.getAndarDesejado()
                 && this.getTempoDeEspera() == outrAve.getTempoDeEspera()
                 && this.getTemperaturaIdeal() == outrAve.getTemperaturaIdeal()
-<<<<<<< HEAD
                 && this.getCorDasPenas().equals(outrAve.getCorDasPenas())) {
-=======
-                && this.corDasPenas.equals(outrAve.corDasPenas)) {
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
             return true;
         } else {
             return false;
@@ -60,7 +52,6 @@ public class AveVoadora extends Ave {
     @Override
     public int hashCode() {
         int hash = 13;
-<<<<<<< HEAD
         hash = hash + getCorDasPenas().hashCode();
         hash = hash + getNome().hashCode();
         hash = hash + getEspecie().hashCode();
@@ -69,16 +60,6 @@ public class AveVoadora extends Ave {
         hash = hash + getAndarDesejado() * 29;
         hash = hash + getTemperaturaIdeal() * 31;
         hash = hash + getTempoDeEspera() * 37;
-=======
-        hash = hash * corDasPenas.hashCode();
-        hash = hash * getNome().hashCode();
-        hash = hash * getEspecie().hashCode();
-        hash = hash * getId() * 17;
-        hash = hash * getPeso() * 23;
-        hash = hash * getAndarDesejado() * 29;
-        hash = hash * getTemperaturaIdeal() * 31;
-        hash = hash * getTempoDeEspera() * 37;
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
         return hash;
     }
 }

@@ -60,11 +60,7 @@ public class Simulador extends javax.swing.JFrame {
                 Animal[] a = arca.getAndares()[i].checarFilaParaElevador();
                 String label = "";
                 for (int j = a.length - 1; j >= 0; j--) {
-<<<<<<< HEAD
                     label += a[j].getClass() + " " + a[j].getAndarDesejado() + " -> ";
-=======
-                    label += a[j].getClass() + " -> ";
->>>>>>> 732492a791dee9b09ececea63e607a3e2fc318c4
                 }
                 switch (i) {
                     case 0 -> labelAndar0.setText(label);
